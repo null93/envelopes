@@ -1,3 +1,7 @@
-node_modules
-dist
+# Files
+.DS_Store
+
+# Directories
 .parcel-cache
+dist
+node_modules
