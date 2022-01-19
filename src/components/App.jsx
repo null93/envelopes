@@ -14,7 +14,7 @@ import { PDFViewer, Document, Font } from "@react-pdf/renderer"
 
 Font.register ({
 	family: "Roboto",
-	src: "http://fonts.gstatic.com/s/roboto/v15/W5F8_SL0XFawnjxHGsZjJA.ttf",
+	src: "https://fonts.gstatic.com/s/roboto/v15/W5F8_SL0XFawnjxHGsZjJA.ttf",
 })
 
 Font.register ({
