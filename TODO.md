@@ -1,0 +1,9 @@
+- POSTNET barcode does not seem to be displaying properly
+- Support for more envelopes
+- Support for custom envelope
+- Suport for font size
+- Organize options better
+- SEO
+- Social media preview
+- README file
+- Custom pdf-viewer so that it rendered consistantly on all devices

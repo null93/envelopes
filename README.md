@@ -1,4 +1,7 @@
 # Envelopes
+> Online utility for generating envelopes in PDF format for printing
+
+### References
 
 https://pe.usps.com/Archive/NHTML/DMMArchive20170807/204.htm
 https://pe.usps.com/text/pub28/28c2_002.htm
