@@ -1,7 +1,5 @@
 - POSTNET barcode does not seem to be displaying properly
 - Support for more envelopes
-- Support for custom envelope
-- Suport for font size
 - Organize options better
 - SEO
 - Social media preview

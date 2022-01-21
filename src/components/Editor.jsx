@@ -17,6 +17,29 @@ import Box from "@mui/material/Box"
 import Alert from "@mui/material/Alert"
 import SimpleRow from "components/SimpleRow"
 import { StorageContext } from "contexts/StorageContext"
+import sizes from "source/sizes"
+
+function determinePersetValue ( props ) {
+	const {
+		envelopePreset,
+		envelopeHeight,
+		envelopeWidth,
+		returnHeight,
+		flapHeight,
+		fontSize,
+	} = props
+	const preset = sizes [ envelopePreset ]
+	if ( false
+		|| preset.height != envelopeHeight
+		|| preset.width != envelopeWidth
+		|| preset.returnHeight != returnHeight
+		|| preset.flapHeight != flapHeight
+		|| preset.fontSize != fontSize
+	) {
+		return "custom"
+	}
+	return envelopePreset
+}
 
 function Editor ( props ) {
 
@@ -26,10 +49,13 @@ function Editor ( props ) {
 		reset,
 		returnAddress, setReturnAddress,
 		recipientAddresses, setRecipientAddresses,
-		envelopeType, setEnvelopeType,
-		customWidth, setCustomWidth,
-		customHeight, setCustomHeight,
+		envelopePreset, setEnvelopePreset,
+		envelopeWidth, setEnvelopeWidth,
+		envelopeHeight, setEnvelopeHeight,
+		flapHeight, setFlapHeight,
+		returnHeight, setReturnHeight,
 		fontFamily, setFontFamily,
+		fontSize, setFontSize,
 		returnOnBackFlap, setReturnOnBackFlap,
 		showStampBorder, setShowStampBorder,
 		showAreas, setShowAreas,
@@ -55,14 +81,13 @@ function Editor ( props ) {
 			</Alert>
 			<Paper elevation={2} sx={{ mb: 3, mt: 3, overflow: "hidden" }} >
 				<TextField
-					autoFocus
 					fullWidth
 					multiline
 					minRows={3}
 					variant="filled"
 					label="Return Address"
 					value={returnAddress}
-					onChange={e => setReturnAddress ( e.target.value.split ("\n").slice ( 0, 6 ).join ("\n") )}
+					onChange={e => setReturnAddress ( e.target.value.split ("\n").slice ( 0, 5 ).join ("\n") )}
 				/>
 			</Paper>
 			<Paper elevation={2} sx={{ mt: 3, mb: 3, overflow: "hidden" }} >
@@ -78,47 +103,78 @@ function Editor ( props ) {
 			</Paper>
 			<Paper elevation={2} sx={{ mt: 3, mb: 3 }} >
 				<SimpleRow>
-					<Typography>Envelope Type</Typography>
+					<Typography>Envelope Preset</Typography>
 					<Select
 						variant="filled"
 						hiddenLabel={true}
-						value={envelopeType}
-						onChange={e => setEnvelopeType ( e.target.value )} >
+						value={determinePersetValue ({
+							envelopePreset,
+							envelopeHeight,
+							envelopeWidth,
+							returnHeight,
+							flapHeight,
+							fontSize,
+						})}
+						onChange={e => {
+							setEnvelopePreset ( e.target.value )
+							if ( e.target.value !== "custom" ) {
+								const preset = sizes [ e.target.value ]
+								setEnvelopeHeight ( preset.height )
+								setEnvelopeWidth ( preset.width )
+								setFontSize ( preset.fontSize )
+								setFlapHeight ( preset.flapHeight )
+								setReturnHeight ( preset.returnHeight )
+							}
+						}} >
 						<MenuItem value="10-regular" >#10 - Regular</MenuItem>
-						<MenuItem value="10-square" disabled >#10 - Square</MenuItem>
+						<MenuItem value="10-square" >#10 - Square</MenuItem>
 						<MenuItem value="custom" disabled >Custom</MenuItem>
 					</Select>
 				</SimpleRow>
-				{
-					envelopeType === "custom" && <SimpleRow>
-						<Typography>Envelope Dimensions </Typography>
-						<Box sx={{ display: "flex", alignItems: "center", justifyContent: "flex-end" }} >
-							<TextField
-								type="number"
-								variant="filled"
-								hiddenLabel={true}
-								value={customWidth}
-								placeholder="1.00"
-								onChange={e => setCustomWidth ( e.target.value )}
-								inputProps={{ min: "1" }}
-								sx={{ width: 100 }}
-								InputProps={{ endAdornment: <InputAdornment position="end" >″ W</InputAdornment> }}
-							/>
-							<ClearIcon sx={{ mx: 1, fontSize: 14 }} fontSize="inherit" />
-							<TextField
-								type="number"
-								variant="filled"
-								hiddenLabel={true}
-								value={customHeight}
-								placeholder="1.00"
-								onChange={e => setCustomHeight ( e.target.value )}
-								sx={{ width: 100 }}
-								inputProps={{ min: "1" }}
-								InputProps={{ endAdornment: <InputAdornment position="end" >″ H</InputAdornment> }}
-							/>
-						</Box>
-					</SimpleRow>
-				}
+				<SimpleRow>
+					<Typography>Envelope Dimensions </Typography>
+					<Box sx={{ display: "flex", alignItems: "center", justifyContent: "flex-end" }} >
+						<TextField
+							type="number"
+							variant="filled"
+							hiddenLabel={true}
+							value={envelopeWidth}
+							placeholder="1.00"
+							onChange={e => setEnvelopeWidth ( e.target.value )}
+							inputProps={{ min: "1", style: { textAlign: "right" } }}
+							sx={{ width: 100 }}
+							InputProps={{ endAdornment: <InputAdornment position="end" >″ W</InputAdornment> }}
+						/>
+						<ClearIcon sx={{ mx: 1, fontSize: 14 }} fontSize="inherit" />
+						<TextField
+							type="number"
+							variant="filled"
+							hiddenLabel={true}
+							value={envelopeHeight}
+							placeholder="1.00"
+							onChange={e => setEnvelopeHeight ( e.target.value )}
+							sx={{ width: 100 }}
+							inputProps={{ min: "1", style: { textAlign: "right" } }}
+							InputProps={{ endAdornment: <InputAdornment position="end" >″ H</InputAdornment> }}
+						/>
+					</Box>
+				</SimpleRow>
+				<SimpleRow>
+					<Typography>Return Address Height</Typography>
+					<Box sx={{ display: "flex", alignItems: "center", justifyContent: "flex-end" }} >
+						<TextField
+							type="number"
+							variant="filled"
+							hiddenLabel={true}
+							value={returnHeight}
+							placeholder="1.00"
+							onChange={e => setReturnHeight ( e.target.value )}
+							inputProps={{ min: "1", style: { textAlign: "right" } }}
+							sx={{ width: 100 }}
+							InputProps={{ endAdornment: <InputAdornment position="end" >″ W</InputAdornment> }}
+						/>
+					</Box>
+				</SimpleRow>
 				<SimpleRow>
 					<Typography sx={{ display: "flex", alignItems: "center" }} >
 						Font Family
@@ -134,6 +190,23 @@ function Editor ( props ) {
 						<MenuItem value="Open Sans" >Open Sans</MenuItem>
 						<MenuItem value="Roboto" >Roboto</MenuItem>
 						<MenuItem value="Roboto Mono" >Roboto Mono</MenuItem>
+					</Select>
+				</SimpleRow>
+				<SimpleRow>
+					<Typography>Base Font Size</Typography>
+					<Select
+						variant="filled"
+						hiddenLabel={true}
+						value={fontSize}
+						onChange={e => setFontSize ( e.target.value )} >
+						<MenuItem value={8} >8 pt</MenuItem>
+						<MenuItem value={9} >9 pt</MenuItem>
+						<MenuItem value={10} >10 pt</MenuItem>
+						<MenuItem value={11} >11 pt</MenuItem>
+						<MenuItem value={12} >12 pt</MenuItem>
+						<MenuItem value={13} >13 pt</MenuItem>
+						<MenuItem value={14} >14 pt</MenuItem>
+						<MenuItem value={15} >15 pt</MenuItem>
 					</Select>
 				</SimpleRow>
 				<SimpleRow>
@@ -167,6 +240,24 @@ function Editor ( props ) {
 						onChange={e => setReturnOnBackFlap ( e.target.checked )}
 					/>
 				</SimpleRow>
+				{
+					returnOnBackFlap && <SimpleRow>
+						<Typography>Back Flap Height</Typography>
+						<Box sx={{ display: "flex", alignItems: "center", justifyContent: "flex-end" }} >
+							<TextField
+								type="number"
+								variant="filled"
+								hiddenLabel={true}
+								value={flapHeight}
+								placeholder="1.00"
+								onChange={e => setFlapHeight ( e.target.value )}
+								inputProps={{ min: "1", style: { textAlign: "right" } }}
+								sx={{ width: 100 }}
+								InputProps={{ endAdornment: <InputAdornment position="end" >″ W</InputAdornment> }}
+							/>
+						</Box>
+					</SimpleRow>
+				}
 				<SimpleRow>
 					<Typography>Show Safe Areas</Typography>
 					<Switch

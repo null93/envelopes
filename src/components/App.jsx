@@ -32,10 +32,14 @@ function App ( props ) {
 	const {
 		returnAddress,
 		recipientAddresses,
-		envelopeType,
+		envelopeHeight,
+		envelopeWidth,
 		fontFamily,
+		fontSize,
 		recipientTextAlign,
 		returnOnBackFlap,
+		flapHeight,
+		returnHeight,
 		showReturnAddress,
 		showStampBorder,
 		showAreas,
@@ -45,8 +49,9 @@ function App ( props ) {
 	} = useContext ( StorageContext )
 
 	const addresses = recipientAddresses
-		.split(/\n{2,}/g)
-		.map(e => e.trim()).filter(e => !!e)
+		.split (/\n{2,}/g)
+		.map ( e => e.trim()).filter(e => !!e)
+		.map ( e => e.split ("\n").slice ( 0, 5 ).join ("\n") )
 
 	if ( reversePageOrder ) {
 		addresses.reverse ()
@@ -65,7 +70,6 @@ function App ( props ) {
 								key={`front-${index}-${recipientAddress}`}
 								returnAddress={returnOnBackFlap ? "" : returnAddress}
 								recipientAddress={recipientAddress}
-								envelopeType={envelopeType}
 								fontFamily={fontFamily}
 								recipientTextAlign={recipientTextAlign}
 								showReturnAddress={showReturnAddress}
@@ -74,14 +78,21 @@ function App ( props ) {
 								showBarcode={showBarcode}
 								capitalizeText={capitalizeText}
 								reversePageOrder={reversePageOrder}
+								fontSize={fontSize}
+								envelopeHeight={envelopeHeight}
+								envelopeWidth={envelopeWidth}
+								returnHeight={returnHeight}
 							/>,
 							returnOnBackFlap && <EnvelopeBack
 								key={`back-${index}-${recipientAddress}`}
 								returnAddress={returnAddress}
-								envelopeType={envelopeType}
 								fontFamily={fontFamily}
 								showAreas={showAreas}
 								capitalizeText={capitalizeText}
+								fontSize={fontSize}
+								envelopeHeight={envelopeHeight}
+								envelopeWidth={envelopeWidth}
+								flapHeight={flapHeight}
 							/>,
 						])
 					}

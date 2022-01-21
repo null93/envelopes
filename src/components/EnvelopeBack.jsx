@@ -7,23 +7,23 @@ function points ( num, frac = 0 ) {
 	return ( num * 72 ) + ( frac * 72 )
 }
 
-function makeStyle({ fontFamily, recipientTextAlign }) {
+function makeStyle({ fontFamily, fontSize, flapHeight }) {
+	console.log ( flapHeight )
 	return StyleSheet.create({
 		page: {
+			fontFamily,
+			fontSize,
+			color: "black",
 			display: "flex",
 			alignItems: "center",
 		},
 		backFlapArea: {
-			fontFamily,
-			fontSize: 12,
-			color: "black",
-			textAlign: "center",
 			display: "flex",
+			textAlign: "center",
 			alignItems: "center",
 			justifyContent: "center",
-			padding: points(1 / 4),
-			height: points(1, 3 / 8),
-			width: points(4, 3 / 4),
+			height: points ( flapHeight ),
+			width: "100%",
 		},
 	})
 }
@@ -32,22 +32,20 @@ function EnvelopeBack ( props ) {
 
 	const {
 		returnAddress,
-		envelopeType,
-		fontFamily,
+		envelopeHeight,
+		envelopeWidth,
 		showAreas,
 		capitalizeText,
 	} = props
 
-	const styles = makeStyle({
-		fontFamily,
-	})
+	const styles = makeStyle( props )
 
 	return <Page
 		orientation="portrait"
 		style={styles.page}
 		size={{
-			width: points ( 9, 1/2 ),
-			height: points ( 4, 1/8 ),
+			width: points ( envelopeWidth ),
+			height: points ( envelopeHeight ),
 		}} >
 		<View
 			debug={showAreas}

@@ -2,45 +2,51 @@
 
 import { Page, Text, View, Image, StyleSheet } from "@react-pdf/renderer"
 import Barcode from "components/Barcode"
+import sizes from "source/sizes"
 
 function points ( num, frac = 0 ) {
 	return ( num * 72 ) + ( frac * 72 )
 }
 
-function makeStyle({ fontFamily, recipientTextAlign }) {
+function makeStyle({ fontFamily, fontSize, recipientTextAlign, returnHeight }) {
 	return StyleSheet.create({
 		page: {
 			fontFamily,
-			position: "relative",
-		},
-		returnAddressArea: {
-			fontSize: 12,
+			fontSize,
 			color: "black",
+			display: "flex",
+			flexDirection: "column",
+			width: "100%",
+			height: "100%",
+			maxHeight: "100%",
+			overflow: "hidden",
+		},
+		returnAddress: {
 			textAlign: "left",
-			padding: points(1 / 4),
-			paddingBottom: 0,
-			paddingRight: 0,
-			height: points(1, 3 / 8),
-			width: points(4, 3 / 4),
+			paddingTop: points(1 / 4),
+			paddingLeft: points(1 / 4),
+			width: "50%",
+			minHeight: points ( returnHeight ),
 		},
-		recipientAddressArea: {
-			fontSize: 14,
-			color: "black",
+		recipientAddress: {
+			fontSize: fontSize + 2,
 			display: "flex",
 			justifyContent: "center",
 			alignItems: "center",
 			textAlign: recipientTextAlign,
-			padding: 0,
-			height: points(2, 1 / 8),
-			width: points(9),
-			marginHorizontal: points(1 / 4),
+			paddingHorizontal: points(1 / 4),
+			width: "100%",
+			flex: 1,
 		},
 		barcodeArea: {
-			position: "absolute",
-			right: 0,
-			bottom: 0,
+			display: "flex",
+			width: "100%",
 			height: points(5 / 8),
-			width: points(4, 3 / 4),
+			alignItems: "flex-end",
+		},
+		barcode: {
+			height: "100%",
+			width: "50%",
 			objectFit: "none",
 			objectPosition: "center",
 		},
@@ -77,30 +83,26 @@ function EnvelopeFront ( props ) {
 	const {
 		returnAddress,
 		recipientAddress,
-		envelopeType,
-		fontFamily,
-		recipientTextAlign,
+		envelopeHeight,
+		envelopeWidth,
 		showStampBorder,
 		showAreas,
 		showBarcode,
 		capitalizeText,
 	} = props
 
-	const styles = makeStyle({
-		fontFamily,
-		recipientTextAlign,
-	})
+	const styles = makeStyle ( props )
 
 	return <Page
 		orientation="portrait"
 		style={styles.page}
 		size={{
-			width: points ( 9, 1/2 ),
-			height: points ( 4, 1/8 ),
+			width: points ( envelopeWidth ),
+			height: points ( envelopeHeight ),
 		}} >
 		<View
 			debug={showAreas}
-			style={styles.returnAddressArea} >
+			style={styles.returnAddress} >
 			<Text>
 				{
 					capitalizeText
@@ -111,7 +113,7 @@ function EnvelopeFront ( props ) {
 		</View>
 		<View
 			debug={showAreas}
-			style={styles.recipientAddressArea} >
+			style={styles.recipientAddress} >
 			<Text>
 			{
 				capitalizeText
@@ -121,11 +123,13 @@ function EnvelopeFront ( props ) {
 			</Text>
 		</View>
 		{
-			showBarcode && <Image
-				src={Barcode ( recipientAddress )}
-				debug={showAreas}
-				style={styles.barcodeArea}
-			/>
+			showBarcode && <View style={styles.barcodeArea} >
+				<Image
+					src={Barcode ( recipientAddress )}
+					debug={showAreas}
+					style={styles.barcode}
+				/>
+			</View>
 		}
 		{
 			showStampBorder && <View
