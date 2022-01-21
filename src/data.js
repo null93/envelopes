@@ -10,17 +10,19 @@ function generate ( company = false ) {
 	].join ("\n")
 }
 
+const defaultPreset = "#10 - Regular"
+
 export default {
 	returnAddress: generate ( false ),
 	recipientAddresses: generate ( true ) + "\n\n" + generate ( false ),
-	envelopePreset: "10-regular",
-	envelopeWidth: sizes ["10-regular"].width,
-	envelopeHeight: sizes ["10-regular"].height,
+	envelopePreset: defaultPreset,
+	envelopeWidth: sizes [defaultPreset].width,
+	envelopeHeight: sizes [defaultPreset].height,
 	fontFamily: "Roboto",
-	fontSize: sizes ["10-regular"].fontSize,
+	fontSize: sizes [defaultPreset].fontSize,
 	returnOnBackFlap: false,
-	returnHeight: sizes ["10-regular"].returnHeight,
-	flapHeight: sizes ["10-regular"].flapHeight,
+	returnHeight: sizes [defaultPreset].returnHeight,
+	flapHeight: sizes [defaultPreset].flapHeight,
 	showStampBorder: true,
 	showAreas: false,
 	showBarcode: true,

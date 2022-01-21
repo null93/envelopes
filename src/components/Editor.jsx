@@ -7,6 +7,7 @@ import Link from "@mui/material/Link"
 import MenuItem from "@mui/material/MenuItem"
 import TextField from "@mui/material/TextField"
 import Switch from "@mui/material/Switch"
+import Divider from "@mui/material/Divider"
 import Typography from "@mui/material/Typography"
 import Paper from "@mui/material/Paper"
 import Tooltip from "@mui/material/Tooltip"
@@ -126,8 +127,11 @@ function Editor ( props ) {
 								setReturnHeight ( preset.returnHeight )
 							}
 						}} >
-						<MenuItem value="10-regular" >#10 - Regular</MenuItem>
-						<MenuItem value="10-square" >#10 - Square</MenuItem>
+						{
+							Object.keys ( sizes ).map ( key =>
+								<MenuItem key={key} value={key} >{key}</MenuItem>
+							)
+						}
 						<MenuItem value="custom" disabled >Custom</MenuItem>
 					</Select>
 				</SimpleRow>
@@ -138,24 +142,24 @@ function Editor ( props ) {
 							type="number"
 							variant="filled"
 							hiddenLabel={true}
-							value={envelopeWidth}
+							value={envelopeHeight}
 							placeholder="1.00"
-							onChange={e => setEnvelopeWidth ( e.target.value )}
+							onChange={e => setEnvelopeHeight ( e.target.value )}
+							sx={{ width: 95 }}
 							inputProps={{ min: "1", style: { textAlign: "right" } }}
-							sx={{ width: 100 }}
-							InputProps={{ endAdornment: <InputAdornment position="end" >″ W</InputAdornment> }}
+							InputProps={{ endAdornment: <InputAdornment position="end" >″ H</InputAdornment> }}
 						/>
-						<ClearIcon sx={{ mx: 1, fontSize: 14 }} fontSize="inherit" />
+						<Divider orientation="vertical" flexItem />
 						<TextField
 							type="number"
 							variant="filled"
 							hiddenLabel={true}
-							value={envelopeHeight}
+							value={envelopeWidth}
 							placeholder="1.00"
-							onChange={e => setEnvelopeHeight ( e.target.value )}
-							sx={{ width: 100 }}
+							onChange={e => setEnvelopeWidth ( e.target.value )}
 							inputProps={{ min: "1", style: { textAlign: "right" } }}
-							InputProps={{ endAdornment: <InputAdornment position="end" >″ H</InputAdornment> }}
+							sx={{ width: 95 }}
+							InputProps={{ endAdornment: <InputAdornment position="end" >″ W</InputAdornment> }}
 						/>
 					</Box>
 				</SimpleRow>
