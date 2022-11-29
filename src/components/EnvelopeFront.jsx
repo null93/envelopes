@@ -2,13 +2,12 @@
 
 import { Page, Text, View, Image, StyleSheet } from "@react-pdf/renderer"
 import Barcode from "components/Barcode"
-import sizes from "source/sizes"
 
 function points ( num, frac = 0 ) {
 	return ( num * 72 ) + ( frac * 72 )
 }
 
-function makeStyle({ fontFamily, fontSize, recipientTextAlign, returnHeight }) {
+function makeStyle({ fontFamily, firstLineFontFamily, fontSize, firstLineFontSize, extraSpaceAfterFirstLine, recipientTextAlign, returnHeight }) {
 	return StyleSheet.create({
 		page: {
 			fontFamily,
@@ -28,7 +27,7 @@ function makeStyle({ fontFamily, fontSize, recipientTextAlign, returnHeight }) {
 			width: "50%",
 			minHeight: points ( returnHeight ),
 		},
-		recipientAddress: {
+		recipientAddressArea: {
 			fontSize: fontSize + 2,
 			display: "flex",
 			justifyContent: "center",
@@ -37,6 +36,14 @@ function makeStyle({ fontFamily, fontSize, recipientTextAlign, returnHeight }) {
 			paddingHorizontal: points(1 / 4),
 			width: "100%",
 			flex: 1,
+		},
+		recipientAddress: {
+			fontSize: fontSize + 2,
+		},
+		firstLine: {
+			fontSize: firstLineFontSize + 2,
+			fontFamily: firstLineFontFamily,
+			paddingBottom: extraSpaceAfterFirstLine ? fontSize : 0,
 		},
 		barcodeArea: {
 			display: "flex",
@@ -113,12 +120,15 @@ function EnvelopeFront ( props ) {
 		</View>
 		<View
 			debug={showAreas}
-			style={styles.recipientAddress} >
-			<Text>
+			style={styles.recipientAddressArea} >
+			<Text style={styles.firstLine} >
 			{
-				capitalizeText
-				? recipientAddress.toUpperCase ()
-				: recipientAddress
+				( capitalizeText ? recipientAddress.toUpperCase () : recipientAddress ).replace (/^([^\n]+).*$/s, "$1")
+			}
+			</Text>
+			<Text style={styles.recipientAddress} >
+			{
+				( capitalizeText ? recipientAddress.toUpperCase () : recipientAddress ).replace (/^[^\n]+\n?(.*)$/s, "$1")
 			}
 			</Text>
 		</View>

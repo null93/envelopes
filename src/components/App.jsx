@@ -27,6 +27,26 @@ Font.register ({
 	src: "https://fonts.gstatic.com/s/opensans/v13/IgZJs4-7SA1XX_edsoXWog.ttf",
 })
 
+Font.register ({
+	family: "Poppins",
+	src: "http://fonts.gstatic.com/s/poppins/v1/hlvAxH6aIdOjWlLzgm0jqg.ttf",
+})
+
+Font.register ({
+	family: "Dancing Script",
+	src: "http://fonts.gstatic.com/s/dancingscript/v7/KGBfwabt0ZRLA5W1ywjowb_dAmXiKjTPGCuO6G2MbfA.ttf",
+})
+
+Font.register ({
+	family: "Satisfy",
+	src: "http://fonts.gstatic.com/s/satisfy/v6/PRlyepkd-JCGHiN8e9WV2w.ttf",
+})
+
+Font.register ({
+	family: "Dawning of a New Day",
+	src: "http://fonts.gstatic.com/s/dawningofanewday/v7/JiDsRhiKZt8uz3NJ5xA06gXLnohmOYWQZqo_sW8GLTk.ttf",
+})
+
 function App ( props ) {
 
 	const {
@@ -35,7 +55,10 @@ function App ( props ) {
 		envelopeHeight,
 		envelopeWidth,
 		fontFamily,
+		firstLineFontFamily,
 		fontSize,
+		firstLineFontSize,
+		extraSpaceAfterFirstLine,
 		recipientTextAlign,
 		returnOnBackFlap,
 		flapHeight,
@@ -71,6 +94,7 @@ function App ( props ) {
 								returnAddress={returnOnBackFlap ? "" : returnAddress}
 								recipientAddress={recipientAddress}
 								fontFamily={fontFamily}
+								firstLineFontFamily={firstLineFontFamily}
 								recipientTextAlign={recipientTextAlign}
 								showReturnAddress={showReturnAddress}
 								showStampBorder={showStampBorder}
@@ -79,6 +103,8 @@ function App ( props ) {
 								capitalizeText={capitalizeText}
 								reversePageOrder={reversePageOrder}
 								fontSize={fontSize}
+								firstLineFontSize={firstLineFontSize}
+								extraSpaceAfterFirstLine={extraSpaceAfterFirstLine}
 								envelopeHeight={envelopeHeight}
 								envelopeWidth={envelopeWidth}
 								returnHeight={returnHeight}

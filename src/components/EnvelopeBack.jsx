@@ -8,7 +8,6 @@ function points ( num, frac = 0 ) {
 }
 
 function makeStyle({ fontFamily, fontSize, flapHeight }) {
-	console.log ( flapHeight )
 	return StyleSheet.create({
 		page: {
 			fontFamily,

@@ -56,7 +56,10 @@ function Editor ( props ) {
 		flapHeight, setFlapHeight,
 		returnHeight, setReturnHeight,
 		fontFamily, setFontFamily,
+		firstLineFontFamily, setFirstLineFontFamily,
 		fontSize, setFontSize,
+		firstLineFontSize, setFirstLineFontSize,
+		extraSpaceAfterFirstLine, setExtraSpaceAfterFirstLine,
 		returnOnBackFlap, setReturnOnBackFlap,
 		showStampBorder, setShowStampBorder,
 		showAreas, setShowAreas,
@@ -194,6 +197,29 @@ function Editor ( props ) {
 						<MenuItem value="Open Sans" >Open Sans</MenuItem>
 						<MenuItem value="Roboto" >Roboto</MenuItem>
 						<MenuItem value="Roboto Mono" >Roboto Mono</MenuItem>
+						<MenuItem value="Poppins" >Poppins</MenuItem>
+						<MenuItem value="Dancing Script" >Dancing Script</MenuItem>
+						<MenuItem value="Satisfy" >Satisfy</MenuItem>
+						<MenuItem value="Dawning of a New Day" >Dawning of a New Day</MenuItem>
+					</Select>
+				</SimpleRow>
+				<SimpleRow>
+					<Typography sx={{ display: "flex", alignItems: "center" }} >
+						First Line Font Family
+					</Typography>
+					<Select
+						variant="filled"
+						hiddenLabel={true}
+						value={firstLineFontFamily}
+						onChange={e => setFirstLineFontFamily ( e.target.value )} >
+						<MenuItem value="Open Sans" >Open Sans</MenuItem>
+						<MenuItem value="Roboto" >Roboto</MenuItem>
+						<MenuItem value="Roboto Mono" >Roboto Mono</MenuItem>
+						<MenuItem value="Poppins" >Poppins</MenuItem>
+						<MenuItem value="Dancing Script" >Dancing Script</MenuItem>
+						<MenuItem value="Satisfy" >Satisfy</MenuItem>
+						<MenuItem value="Satisfy" >Satisfy</MenuItem>
+						<MenuItem value="Dawning of a New Day" >Dawning of a New Day</MenuItem>
 					</Select>
 				</SimpleRow>
 				<SimpleRow>
@@ -211,7 +237,45 @@ function Editor ( props ) {
 						<MenuItem value={13} >13 pt</MenuItem>
 						<MenuItem value={14} >14 pt</MenuItem>
 						<MenuItem value={15} >15 pt</MenuItem>
+						<MenuItem value={16} >16 pt</MenuItem>
+						<MenuItem value={17} >17 pt</MenuItem>
+						<MenuItem value={18} >18 pt</MenuItem>
+						<MenuItem value={19} >19 pt</MenuItem>
+						<MenuItem value={20} >20 pt</MenuItem>
+						<MenuItem value={21} >21 pt</MenuItem>
+						<MenuItem value={22} >22 pt</MenuItem>
 					</Select>
+				</SimpleRow>
+				<SimpleRow>
+					<Typography>First Line Font Size</Typography>
+					<Select
+						variant="filled"
+						hiddenLabel={true}
+						value={firstLineFontSize}
+						onChange={e => setFirstLineFontSize ( e.target.value )} >
+						<MenuItem value={8} >8 pt</MenuItem>
+						<MenuItem value={9} >9 pt</MenuItem>
+						<MenuItem value={10} >10 pt</MenuItem>
+						<MenuItem value={11} >11 pt</MenuItem>
+						<MenuItem value={12} >12 pt</MenuItem>
+						<MenuItem value={13} >13 pt</MenuItem>
+						<MenuItem value={14} >14 pt</MenuItem>
+						<MenuItem value={15} >15 pt</MenuItem>
+						<MenuItem value={16} >16 pt</MenuItem>
+						<MenuItem value={17} >17 pt</MenuItem>
+						<MenuItem value={18} >18 pt</MenuItem>
+						<MenuItem value={19} >19 pt</MenuItem>
+						<MenuItem value={20} >20 pt</MenuItem>
+						<MenuItem value={21} >21 pt</MenuItem>
+						<MenuItem value={22} >22 pt</MenuItem>
+					</Select>
+				</SimpleRow>
+				<SimpleRow>
+					<Typography>Extra Space After First Line</Typography>
+					<Switch
+						checked={extraSpaceAfterFirstLine}
+						onChange={e => setExtraSpaceAfterFirstLine ( e.target.checked )}
+					/>
 				</SimpleRow>
 				<SimpleRow>
 					<Typography sx={{ display: "flex", alignItems: "center" }} >

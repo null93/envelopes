@@ -219,11 +219,6 @@
     "@babel/helper-validator-identifier" "^7.16.7"
     to-fast-properties "^2.0.0"
 
-"@canvas-fonts/helvetica@^1.0.4":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@canvas-fonts/helvetica/-/helvetica-1.0.4.tgz#0c164528b9ececb4e8979de752fdc4470a5f0e4b"
-  integrity sha512-IgHf+Kt9/7FlQd9c5PNqx5lh3e4pOw/CgL+bh5kCNNQE2rMdsXBy4BdPgLNDmBowoFPdLERdycd/xNY0PTRpSQ==
-
 "@emotion/babel-plugin@^11.3.0":
   version "11.7.2"
   resolved "https://registry.yarnpkg.com/@emotion/babel-plugin/-/babel-plugin-11.7.2.tgz#fec75f38a6ab5b304b0601c74e2a5e77c95e5fa0"
