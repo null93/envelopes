@@ -218,7 +218,6 @@ function Editor ( props ) {
 						<MenuItem value="Poppins" >Poppins</MenuItem>
 						<MenuItem value="Dancing Script" >Dancing Script</MenuItem>
 						<MenuItem value="Satisfy" >Satisfy</MenuItem>
-						<MenuItem value="Satisfy" >Satisfy</MenuItem>
 						<MenuItem value="Dawning of a New Day" >Dawning of a New Day</MenuItem>
 					</Select>
 				</SimpleRow>
