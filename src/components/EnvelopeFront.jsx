@@ -44,6 +44,7 @@ function makeStyle({ fontFamily, firstLineFontFamily, fontSize, firstLineFontSiz
 			fontSize: firstLineFontSize + 2,
 			fontFamily: firstLineFontFamily,
 			paddingBottom: extraSpaceAfterFirstLine ? fontSize : 0,
+			textAlign: recipientTextAlign,
 		},
 		barcodeArea: {
 			display: "flex",
