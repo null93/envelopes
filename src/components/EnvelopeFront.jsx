@@ -7,7 +7,7 @@ function points ( num, frac = 0 ) {
 	return ( num * 72 ) + ( frac * 72 )
 }
 
-function makeStyle({ fontFamily, firstLineFontFamily, fontSize, firstLineFontSize, extraSpaceAfterFirstLine, recipientTextAlign, returnHeight }) {
+function makeStyle({ fontFamily, firstLineFontFamily, fontSize, firstLineFontSize, recipientTextAlign, returnHeight }) {
 	return StyleSheet.create({
 		page: {
 			fontFamily,
@@ -43,8 +43,10 @@ function makeStyle({ fontFamily, firstLineFontFamily, fontSize, firstLineFontSiz
 		firstLine: {
 			fontSize: firstLineFontSize + 2,
 			fontFamily: firstLineFontFamily,
-			paddingBottom: extraSpaceAfterFirstLine ? fontSize : 0,
 			textAlign: recipientTextAlign,
+		},
+		extraSpace: {
+			fontSize: fontSize / 2,
 		},
 		barcodeArea: {
 			display: "flex",
@@ -122,15 +124,20 @@ function EnvelopeFront ( props ) {
 		<View
 			debug={showAreas}
 			style={styles.recipientAddressArea} >
-			<Text style={styles.firstLine} >
-			{
-				( capitalizeText ? recipientAddress.toUpperCase () : recipientAddress ).replace (/^([^\n]+).*$/s, "$1")
-			}
-			</Text>
-			<Text style={styles.recipientAddress} >
-			{
-				( capitalizeText ? recipientAddress.toUpperCase () : recipientAddress ).replace (/^[^\n]+\n?(.*)$/s, "$1")
-			}
+			<Text>
+				<Text style={styles.firstLine} >
+				{
+					( capitalizeText ? recipientAddress.toUpperCase () : recipientAddress ).replace (/^([^\n]+).*$/s, "$1") + "\n"
+				}
+				</Text>
+				{
+					props.extraSpaceAfterFirstLine && <Text style={styles.extraSpace} >{"\n"}</Text>
+				}
+				<Text style={styles.recipientAddress} >
+				{
+					( capitalizeText ? recipientAddress.toUpperCase () : recipientAddress ).replace (/^[^\n]+\n?(.*)$/s, "$1")
+				}
+				</Text>
 			</Text>
 		</View>
 		{
