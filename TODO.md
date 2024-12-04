@@ -1,6 +1,0 @@
-- POSTNET barcode does not seem to be displaying properly
-- Organize options better
-- SEO
-- Social media preview
-- README file
-- Custom pdf-viewer so that it rendered consistantly on all devices
