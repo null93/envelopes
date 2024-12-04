@@ -147,7 +147,7 @@ function Editor ( props ) {
 							hiddenLabel={true}
 							value={envelopeHeight}
 							placeholder="1.00"
-							onChange={e => setEnvelopeHeight ( e.target.value )}
+							onChange={e => e.target.value >= 2.0 ? setEnvelopeHeight ( parseFloat ( e.target.value ) ) : setEnvelopeHeight ( 2.0 )}
 							sx={{ width: 95 }}
 							inputProps={{ min: "1", style: { textAlign: "right" } }}
 							InputProps={{ endAdornment: <InputAdornment position="end" >″ H</InputAdornment> }}
@@ -159,7 +159,7 @@ function Editor ( props ) {
 							hiddenLabel={true}
 							value={envelopeWidth}
 							placeholder="1.00"
-							onChange={e => setEnvelopeWidth ( e.target.value )}
+							onChange={e => e.target.value >= 2.0 ? setEnvelopeWidth ( parseFloat ( e.target.value ) ) : setEnvelopeWidth ( 2.0 )}
 							inputProps={{ min: "1", style: { textAlign: "right" } }}
 							sx={{ width: 95 }}
 							InputProps={{ endAdornment: <InputAdornment position="end" >″ W</InputAdornment> }}
